@@ -1,0 +1,51 @@
+
+@define-mixin button {
+    font-family: var(--font-family-body);
+    font-weight: bolder;
+    display: inline-block;
+    line-height: 2;
+    padding: 0px 2em;
+    text-decoration: none;
+}
+
+.button-outline {
+    @mixin button;
+    
+    color: white;
+
+    border: solid 4px var(--color-white);
+    border-radius: 8px;
+    text-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow), inset var(--box-shadow);
+
+    &:hover {
+        background-color: white;
+        box-shadow: var(--box-shadow), inset 0px 0px white;
+        text-shadow: 0px 0px white;
+        color: var(--color-blue);
+    }
+
+    &.large {
+        font-size: var(--font-size-large);
+    }
+}
+
+.button-flat {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: black;
+}
+
+.theme-water {
+    .button-flat {
+        color: var(--color-blue);
+    }
+}
+
+.theme-dark {
+    .button-flat {
+        color: var(--color-aqua);
+    }
+}

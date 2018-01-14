@@ -1,0 +1,17 @@
+h1 {
+    --bg-color: #673AB7;
+
+    background-color: var(--bg-color);
+}
+
+$colors: (
+    primary: #673AB7,
+    primary-light: rgb(130, 88, 202),
+)
+
+@each $name, $hex in $colors{
+    .color {
+        name: $name;
+        color: $hex;
+    }
+}

@@ -1,0 +1,8 @@
+#Home__Places {
+    text-align: center;
+    background-color: var(--color-black);
+
+    h1.headline:after {
+        border-color: var(--color-purple);
+    }
+}

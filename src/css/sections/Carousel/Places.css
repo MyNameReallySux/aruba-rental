@@ -1,0 +1,93 @@
+#Carousel__Places {
+    .slide {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 32px 16px;
+    }
+
+    .owl-stage {
+        display: flex;
+    }
+
+    .owl-item {
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        transition: all 0.4s ease 0s;
+    }
+
+     .slide {
+         flex: 1 0 100%;
+     }
+
+
+    .owl-item:not(.active) {
+        opacity: 0.5;
+    }
+
+    .owl-nav {
+        position: absolute;
+        display: flex;
+        top: 50%;
+        left: 0;
+        width: 100%;
+
+        .owl-prev, & .owl-next {
+            display: block;
+            position: relative;
+            font-size: var(--font-size-large);
+            line-height: 2em;
+            border: solid 1px;
+            padding: 0px 0.7em;
+            opacity: 0.2;
+            transition: all 0.4s ease 0s;
+
+            &.disabled {
+                opacity: 0.1 !important;
+                color: #eeeeee !important;
+                background-color: color(#eeeeee a(50%)) !important;
+            }
+
+            &:not(.disabled):hover {
+                opacity: 1;
+            }
+        }
+
+        .owl-prev {
+            left: -2.5em;
+            margin: 0px auto 0px 0px;
+        }
+
+        .owl-next {
+            right: -2.5em;
+            margin: 0px 0px 0px auto;
+        }
+    }
+
+}
+
+/* Color */ 
+
+.theme-dark #Carousel__Places {
+    .owl-nav {
+        & .owl-prev, & .owl-next {
+            color:  var(--color-aqua);
+        }
+    }
+    .owl-item {
+        &:nth-child(4n + 1){
+            .feature-title:before { background-color: var(--color-aqua) }
+        }
+
+        &:nth-child(4n + 2){
+            .feature-title:before { background-color: var(--color-blue) }
+        }
+
+        &:nth-child(4n + 3){
+            .feature-title:before { background-color: var(--color-pink-lighter) }
+        }
+        &:nth-child(4n + 4){
+            .feature-title:before { background-color: var(--color-purple-lighter) }
+        }
+    }
+}

@@ -1,0 +1,144 @@
+:root {
+    --color-white: #f8f2f9;
+    --color-black: #212114;
+
+    --color-blue: #319dd3;
+    --color-blue-light: color(var(--color-blue) lightness(+ 10%));
+    --color-blue-lighter: color(var(--color-blue) lightness(+ 20%));
+    --color-blue-lightest: color(var(--color-blue) lightness(+ 30%));
+    --color-blue-dark: color(var(--color-blue) lightness(- 10%));
+    --color-blue-darker: color(var(--color-blue) lightness(- 20%));
+    --color-blue-darkest: color(var(--color-blue) lightness(- 30%));
+
+    --color-aqua: color(var(--color-blue) hue(- 30deg));
+    --color-aqua-light: color(var(--color-aqua) lightness(+ 10%));
+    --color-aqua-lighter: color(var(--color-aqua) lightness(+ 20%));
+    --color-aqua-lightest: color(var(--color-aqua) lightness(+ 30%));
+    --color-aqua-dark: color(var(--color-aqua) lightness(- 10%));
+    --color-aqua-darker: color(var(--color-aqua) lightness(- 20%));
+    --color-aqua-darkest: color(var(--color-aqua) lightness(- 30%));
+
+    --color-purple: color(var(--color-blue) hue(+ 60deg));
+    --color-purple-light: color(var(--color-purple) lightness(+ 10%));
+    --color-purple-lighter: color(var(--color-purple) lightness(+ 20%));
+    --color-purple-lightest: color(var(--color-purple) lightness(+ 30%));
+    --color-purple-dark: color(var(--color-purple) lightness(- 10%));
+    --color-purple-darker: color(var(--color-purple) lightness(- 20%));
+    --color-purple-darkest: color(var(--color-purple) lightness(- 30%));
+
+    --color-pink: color(var(--color-blue) hue(+ 130deg));
+    --color-pink-light: color(var(--color-pink) lightness(+ 10%));
+    --color-pink-lighter: color(var(--color-pink) lightness(+ 20%));
+    --color-pink-lightest: color(var(--color-pink) lightness(+ 30%));
+    --color-pink-dark: color(var(--color-pink) lightness(- 10%));
+    --color-pink-darker: color(var(--color-pink) lightness(- 20%));
+    --color-pink-darkest: color(var(--color-pink) lightness(- 30%));
+
+    --color-orange: #E48B27;
+    --color-orange-light: color(var(--color-orange) lightness(+ 10%));
+    --color-orange-lighter: color(var(--color-orange) lightness(+ 20%));
+    --color-orange-lightest: color(var(--color-orange) lightness(+ 30%));
+    --color-orange-dark: color(var(--color-orange) lightness(- 10%));
+    --color-orange-darker: color(var(--color-orange) lightness(- 20%));
+    --color-orange-darkest: color(var(--color-orange) lightness(- 30%));
+
+    --color-red: color(var(--color-orange) hue(- 40deg));
+    --color-red-light: color(var(--color-red) lightness(+ 10%));
+    --color-red-lighter: color(var(--color-red) lightness(+ 20%));
+    --color-red-lightest: color(var(--color-red) lightness(+ 30%));
+    --color-red-dark: color(var(--color-red) lightness(- 10%));
+    --color-red-darker: color(var(--color-red) lightness(- 20%));
+    --color-red-darkest: color(var(--color-red) lightness(- 30%));
+
+    --color-yellow: color(var(--color-orange) hue(+ 20deg));
+    --color-yellow-light: color(var(--color-yellow) lightness(+ 10%));
+    --color-yellow-lighter: color(var(--color-yellow) lightness(+ 20%));
+    --color-yellow-lightest: color(var(--color-yellow) lightness(+ 30%));
+    --color-yellow-dark: color(var(--color-yellow) lightness(- 10%));
+    --color-yellow-darker: color(var(--color-yellow) lightness(- 20%));
+    --color-yellow-darkest: color(var(--color-yellow) lightness(- 30%));  
+}
+
+.gradient-white {
+    background-image: ease-in-sine-gradient(
+        #f8f2f9,
+        transparent
+    )
+}
+
+.gradient-black {
+    background-image: ease-in-sine-gradient(
+        #212114,
+        transparent
+    )
+}
+
+.theme-water {
+    .primary {
+        background-color: var(--color-blue)
+    }
+
+    .primary-lightest {
+            background-color: var(--color-blue-lightest)
+    }
+
+    .gradient-primary {
+        background-image: ease-in-sine-gradient(
+            #319dd3,
+            transparent
+        )
+    }
+
+     .gradient-primary-lightest {
+        background-image: ease-in-sine-gradient(
+            #afd9ee,
+            transparent
+        )
+    }   
+}
+
+.theme-sand {
+    .primary {
+        background-color: var(--color-orange)
+    }
+
+    .primary-lightest {
+            background-color: var(--color-orange-lightest)
+    }
+
+    .secondary {
+        background-color: var(--color-red)
+    }
+
+    .secondary-lightest {
+            background-color: var(--color-red-lightest)
+    }
+
+    .tertiary {
+        background-color: var(--color-yellow)
+    }
+
+    .tertiary-lightest {
+            background-color: var(--color-yellow-lightest)
+    }
+}
+
+.theme-dark {
+    h1, h2, h3, h4, h5, h6, & {
+        color: var(--color-white);
+    }
+
+    .theme-water {
+        .primary {
+            background-color: var(--color-purple)
+        }
+
+        .secondary {
+            background-color: var(--color-blue)
+        }
+
+        .tertiary {
+            background-color: var(--color-aqua)
+        }
+    }
+}

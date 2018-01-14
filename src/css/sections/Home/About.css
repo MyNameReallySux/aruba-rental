@@ -1,0 +1,20 @@
+#Home__About {
+    text-align: center;
+}
+
+.about-background {
+    width: 66.6666666%;
+    flex: 0 0 auto;
+}
+
+/* Colors */
+/* #Home__About {
+    &.theme-water {
+        background: var(--color-blue);  
+    }
+
+    &.theme-sand {
+        background: var(--color-orange);
+    }
+} */
+

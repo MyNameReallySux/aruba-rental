@@ -1,0 +1,14 @@
+#Home__Timeshare {
+    text-align: center;
+}
+
+
+/* Color */
+#Home__Timeshare {
+    &.theme-water {
+        background-color: var(--color-blue-lightest);
+    }
+    &.theme-sand {
+        background-color: var(--color-orange-lightest);
+    }
+}

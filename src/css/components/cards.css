@@ -1,0 +1,235 @@
+:root {
+    --card-background-white: scrim-gradient(
+        #f8f2f9, #eeeeee
+    );
+    --card-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+    --card-box-shadow-hover: 0 8px 16px 2px rgba(0,0,0,0.4);
+    --card-border: solid 1px color(var(--color-black) a(25%))
+}
+
+@define-mixin card $color: var(--color-blue) {
+    position: relative;
+    background-image: var(--card-background-white);
+    box-shadow: var(--card-box-shadow);
+    border: var(--card-border);
+    text-align: left;
+    transition: all 0.4s ease 0s;
+
+    &:hover {
+        box-shadow: var(--card-box-shadow-hover);
+    }
+}
+
+@define-mixin card-title-underline $color: var(--color-blue) {
+    &:after {
+        content: "";
+        display: block;
+        border-bottom: solid 2px;
+        border-color: $color;
+    }
+}
+
+/* Cards */
+.card {
+    @mixin card;
+    
+    .card-image {
+        position: relative;
+        padding-bottom: 56.25%;
+    }
+
+    .card-icon {
+        display: inline-block;
+        padding: 2px 8px;
+        margin-right: 5px;
+        border-radius: 5px 5px 0px 0px;
+        color: white;
+        background-color: var(--color-blue);
+    }
+
+    .card-title {
+        display: inline-block;
+        font-family: var(--font-family-cursive);
+        font-size: var(--font-size-large);
+        padding: 16px 16px 0px;
+
+        @mixin card-title-underline;
+    } 
+
+    .card-body {
+        padding: 16px;
+    }
+
+    .card-footer {
+        text-align: right;
+        padding: 0px 16px 16px 16px;
+    }
+}
+
+.card.card_horizontal {
+     display: flex;
+     flex-direction: column;
+
+     .card-image {
+         padding-bottom: 100%;
+    }
+
+    .card-title {
+        font-family: var(--font-family-cursive);
+        font-size: var(--font-size-xlarge);
+    }
+}
+
+/* Media */
+@media (--medium){
+    .card.card_horizontal {
+        flex-direction: row;
+        
+        .card-image {
+            width: 30%;
+            min-width: 400px;
+            min-height: 240px;
+            padding-bottom: 0px;
+        }
+
+        .card-title {
+            font-size: var(--font-size-huge);
+        }
+    }
+}
+
+/* Parallax Cards */
+
+.parallax-cards {
+    display: flex;
+    flex-direction: column;
+
+    & > [class$='-item'] {
+        display: flex;
+    }
+
+    .parallax-card {
+        width: 100%;
+        max-width: 843px;
+    }
+}
+
+.parallax-card {
+    @mixin card;
+
+    .parallax-card-background {
+        position: absolute;
+        height: 100%;
+        width: 57.5%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+
+        & .overlay.gradient-white {
+            opacity: 1;
+                background-image: scrim-gradient(
+                to left,
+                #f8f2f9,
+                transparent
+            )
+        }
+    }
+
+    .parallax-card-title {
+        display: block;
+        text-align: right;
+        font-family: var(--font-family-cursive);
+        font-size: var(--font-size-huge);
+        line-height: 1;
+
+        & > span {
+            position: relative;
+            padding-left: 1em;
+        }
+
+        & > span:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 60%;
+            display: block;
+            width: 100%;
+            height: 0.2em;
+            opacity: 0.5;
+            z-index: -1;
+            transform: translateY(-50%);
+        }
+    }
+
+    .parallax-card-content {
+        max-width: 37.5%;
+        margin: 0px 0px 0px auto;
+    }
+
+    .parallax-card-body {
+        position: relative;
+        z-index: 2;
+        padding: 16px 32px;
+        text-align: left;
+    }
+}
+
+.parallax-card-item {
+    &:nth-child(3n + 2) {
+        .parallax-card {
+            margin: 0px auto;
+        }
+    }
+    &:nth-child(3n + 3) {
+        .parallax-card {
+            margin: 0px 0px 0px auto;
+        }
+    }
+}
+
+.parallax-card-item + .parallax-card-item {
+    margin-top: 32px;
+}
+
+/* Color */
+.theme-water {
+    .parallax-card-item {
+        &:nth-child(3n + 1) {
+            .parallax-card-title span:after {
+                background: var(--color-blue);
+            }
+        }
+        &:nth-child(3n + 2) {
+            .parallax-card-title span:after {
+                background: var(--color-aqua);
+            }
+        }
+        &:nth-child(3n + 3) {
+            .parallax-card-title span:after {
+                background: var(--color-purple);
+            }
+        }
+        
+    }
+}
+
+.theme-sand {
+    .parallax-card-item {
+        &:nth-child(3n + 1) {
+            .parallax-card-title span:after {
+                background: var(--color-orange);
+            }
+        }
+        &:nth-child(3n + 2) {
+            .parallax-card-title span:after {
+                background: var(--color-red);
+            }
+        }
+        &:nth-child(3n + 3) {
+            .parallax-card-title span:after {
+                background: var(--color-yellow);
+            }
+        }
+    }
+}
+

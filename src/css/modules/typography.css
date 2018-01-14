@@ -1,0 +1,94 @@
+:root {
+    --font-size-base: 16px;
+    --font-size-ratio: 1.414;
+
+    --font-size-miniscule:  calc(var(--font-size-tiny) / var(--font-size-ratio));
+    --font-size-tiny:       calc(var(--font-size-small) / var(--font-size-ratio));
+    --font-size-small:      calc(1rem / var(--font-size-ratio));
+    --font-size-normal:     1rem;
+    --font-size-large:      calc(1rem * var(--font-size-ratio));
+    --font-size-xlarge:     calc(var(--font-size-large) * var(--font-size-ratio));
+    --font-size-huge:       calc(var(--font-size-xlarge) * var(--font-size-ratio));
+    --font-size-gigantic:   calc(var(--font-size-huge) * var(--font-size-ratio));
+
+    --font-family-body: 'Quicksand';
+    --font-family-header: 'Raleway';
+    --font-family-cursive: 'Lobster';
+}
+
+#__LOAD_FONTS__ {
+    font-family: 'Quicksand';
+    font-family: 'Raleway';
+    font-family: 'Lobster';
+}
+
+body {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+h1, .h1{
+    font-family: var(--font-family-cursive);
+    font-size: var(--font-size-huge);
+    font-weight: normal;
+}
+
+h2, .h2{
+    font-family: var(--font-family-header);
+    font-size: var(--font-size-huge);
+}
+
+h3, .h3{
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-xlarge);
+}
+
+h4, .h4{
+    font-family: var(--font-family-cursive);
+    font-size: var(--font-size-large);
+}
+
+h5, .h5{
+    font-family: var(--font-family-header);
+    font-size: var(--font-size-normal);
+}
+
+h6, .h6{
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-small);
+}
+
+h1.headline {
+    display: inline-block;
+    margin-bottom: 32px;
+    &:after {
+        content: "";
+        display: block;
+        border-bottom: solid 4px;
+    }
+}
+
+/* Media */
+
+@media (--medium) {
+    h1, .h1 {
+        font-size: var(--font-size-gigantic)
+    }
+}
+
+/* Colors */
+
+.theme-water {
+    h1.headline:after { border-color: var(--color-blue) }
+}
+
+.theme-sand {
+    h1.headline:after { border-color: var(--color-orange) }
+}
