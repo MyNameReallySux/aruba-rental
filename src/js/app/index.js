@@ -22,13 +22,13 @@ const main = async () => {
     Parallax = await import(/* webpackChunkName: "vendor" */ '@modules/parallax-scroll')
     Luminous = await import(/* webpackChunkName: "vendor" */ '@libs/Luminous')
     let { Scroller } = await import(/* webpackChunkName: "vendor" */ '@libs/Scroller')
-    let { Animation, Sequence } = await import(/* webpackChunkName: "vendor" */ '@libs/Animation')
+    let { AnimationFactory } = await import(/* webpackChunkName: "vendor" */ '@libs/Animation')
 
     let app = new App({
         defer: true,
         jquery: $,
         imports: {
-            Parallax, Luminous, Scroller, Animation, Sequence
+            Parallax, Luminous, Scroller, AnimationFactory
         }
     })
 

@@ -147,7 +147,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 127:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -218,7 +218,7 @@ Object.defineProperty(exports, 'restoreConsole', {
 
 var _app = __webpack_require__(330);
 
-var _consoleUtils = __webpack_require__(127);
+var _consoleUtils = __webpack_require__(125);
 
 var _functions = __webpack_require__(345);
 
@@ -231,7 +231,7 @@ var $ = void 0,
 
 var main = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _ref2, Scroller, _ref3, Animation, Sequence, app;
+        var _ref2, Scroller, _ref3, AnimationFactory, app;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
@@ -267,13 +267,12 @@ var main = function () {
 
                     case 17:
                         _ref3 = _context.sent;
-                        Animation = _ref3.Animation;
-                        Sequence = _ref3.Sequence;
+                        AnimationFactory = _ref3.AnimationFactory;
                         app = new _app.App({
                             defer: true,
                             jquery: $,
                             imports: {
-                                Parallax: Parallax, Luminous: Luminous, Scroller: Scroller, Animation: Animation, Sequence: Sequence
+                                Parallax: Parallax, Luminous: Luminous, Scroller: Scroller, AnimationFactory: AnimationFactory
                             }
                         });
 
@@ -294,7 +293,7 @@ var main = function () {
 
                         app.init();
 
-                    case 24:
+                    case 23:
                     case 'end':
                         return _context.stop();
                 }
@@ -1494,7 +1493,6 @@ var loadSVGs = exports.loadSVGs = function loadSVGs(_ref5) {
 			url: src,
 			success: function success(data) {
 				if (data.childNodes.length > 0) {
-					//should be one, _could_ be more
 					$svg.append(data.childNodes[0]);
 				} else {
 					console.log('invalid SVG');
@@ -1542,103 +1540,12 @@ var loadImages = exports.loadImages = function loadImages(_ref6) {
 
 var handleScroller = exports.handleScroller = function handleScroller(_ref7) {
 	var $ = _ref7.$,
-	    Animation = _ref7.Animation,
-	    Sequence = _ref7.Sequence,
+	    AnimationFactory = _ref7.AnimationFactory,
 	    Scroller = _ref7.Scroller;
+	var makeBasicAnimation = AnimationFactory.makeBasicAnimation,
+	    makeSequentialAnimation = AnimationFactory.makeSequentialAnimation;
 
-	// let fadeInSequentiallyOnInit = (selector, duration = 'default', delay = 100, initialDelay = 400) => {
-	// 	let animationIndex = 0
-	// 	return {
-	// 		selector,
-	// 		onInitialize: ($element) => {
-	// 			setTimeout(() => {
-	// 				$element.removeClass('prepared')
-	// 			}, animationIndex * delay + initialDelay)
-	// 			animationIndex++
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			$element.removeClass('prepared')
-	// 		}
-	// 	}
-	// }
-
-	// let fadeInFromLeft = (selector, duration = 'default', offset = 0) => {
-	// 	return {
-	// 		selector, offset,
-	// 		onInitialize: ($element) => {
-	// 			$element.attr('data-animate', 'fade-in-right')
-	// 			$element.attr('data-duration', duration)
-	// 			$element.addClass('prepared')
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			$element.removeClass('prepared')
-	// 		}
-	// 	}
-	// }
-
-	// let fadeInSequentiallyFromBottom = (selector, duration = 'default', offset = 0, delay = 100) => {
-	// 	let animationIndex = 0;
-	// 	return {
-	// 		selector, offset,
-	// 		onInitialize: ($element) => {
-	// 			$element.attr('data-animate', 'fade-in-up')
-	// 			$element.attr('data-duration', duration)
-	// 			$element.attr('data-index', animationIndex)
-	// 			$element.addClass('prepared')
-	// 			animationIndex++
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			let animationIndex = $element.attr('data-index')
-	// 			setTimeout(() => {
-	// 				$element.removeClass('prepared')
-	// 			}, animationIndex * delay)
-	// 		}
-	// 	}
-	// }
-
-	var fadeInFromLeft = new Animation('fade-in-from-left');
-	var fadeInFromBottom = new Animation('fade-in-from-bottom', { duration: 1 });
-
-	var fadeInSequentiallyFromLeft = new Sequence('parallax-cards', fadeInFromLeft);
-	var fadeInSequentiallyFromBottom = new Sequence('amenities-cards', fadeInFromBottom);
-
-	var scroller = new Scroller([{
-		selector: '.card_horizontal', offset: 0,
-		onInitElement: function onInitElement($element) {
-			return fadeInFromLeft.prepare($element);
-		},
-		onBottomIn: function onBottomIn($element) {
-			return Animation.trigger($element);
-		}
-	}, {
-		selector: '#Carousel__Amenities', offset: 0,
-		onInit: function onInit($element) {
-			var $elements = $element.find('.slide .card');
-			fadeInSequentiallyFromBottom.prepare($elements);
-		},
-		onBottomIn: function onBottomIn($element) {
-			return Sequence.trigger('amenities-cards', 150);
-		}
-	}, {
-		selector: '.parallax-cards', offset: 0,
-		onInit: function onInit($element) {
-			var $elements = $element.find('.parallax-card');
-			fadeInSequentiallyFromLeft.prepare($elements);
-		},
-		onBottomIn: function onBottomIn($element) {
-			return Sequence.trigger('parallax-cards', 150);
-		}
-	}]);
-
-	// let scroller = new Scroller([
-	// 	fadeInSequentiallyOnInit('.intro-content > *', 'long', 400, 400),
-	// 	fadeInFromLeft('.card_horizontal', 'default', 100),
-	// 	fadeInFromLeft('.parallax-card', 'default,' -100),
-	// 	fadeInSequentiallyFromBottom('.slide .card', 'long', 0, 150),
-	// 	fadeInSequentiallyFromBottom('.slide .feature', 'long', 400, 300)
-	// ])
-
-	// console.log(Scroller.registry)
+	var scroller = new Scroller([makeBasicAnimation('.card_horizontal', 'fade-in-from-left', { offset: 0, duration: 0.6 }), makeBasicAnimation('.parallax-card', 'fade-in-from-left', { offset: -100, duration: 0.6 }), makeSequentialAnimation(['#Carousel__Amenities', '.card'], 'fade-in-from-bottom', '@amenities-cards', { duration: 0.6, delay: 200 }), makeSequentialAnimation(['#Carousel__Places', '.feature'], 'fade-in-from-bottom', '@feature-cards', { offset: 350, duration: 0.6, delay: 250 })]);
 };
 
 /***/ }),

@@ -99,7 +99,7 @@ module.exports = __webpack_require__(6) ? function (object, key, value) {
 
 /***/ }),
 
-/***/ 125:
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
@@ -110,7 +110,7 @@ $export($export.S + $export.F, 'Object', { assign: __webpack_require__(93) });
 
 /***/ }),
 
-/***/ 126:
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13934,9 +13934,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-__webpack_require__(125);
-
 __webpack_require__(126);
+
+__webpack_require__(127);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14018,11 +14018,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LuminousGallery = exports.Luminous = undefined;
 
-var _Luminous = __webpack_require__(357);
+var _Luminous = __webpack_require__(358);
 
 var _Luminous2 = _interopRequireDefault(_Luminous);
 
-var _LuminousGallery = __webpack_require__(361);
+var _LuminousGallery = __webpack_require__(363);
 
 var _LuminousGallery2 = _interopRequireDefault(_LuminousGallery);
 
@@ -14050,7 +14050,7 @@ var _jquery = __webpack_require__(350);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _consoleUtils = __webpack_require__(127);
+var _consoleUtils = __webpack_require__(125);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14301,140 +14301,35 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.Sequence = exports.Animation = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _Animation = __webpack_require__(357);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+Object.defineProperty(exports, 'Animation', {
+  enumerable: true,
+  get: function get() {
+    return _Animation.Animation;
+  }
+});
 
-var _jquery = __webpack_require__(350);
+var _Sequence = __webpack_require__(359);
 
-var _jquery2 = _interopRequireDefault(_jquery);
+Object.defineProperty(exports, 'Sequence', {
+  enumerable: true,
+  get: function get() {
+    return _Sequence.Sequence;
+  }
+});
 
-var _consoleUtils = __webpack_require__(127);
+var _AnimationFactory = __webpack_require__(364);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Animation = exports.Animation = function Animation(name) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, Animation);
-
-    _initialiseProps.call(this);
-
-    options.name = name;
-    this.options = Object.assign({}, options, Animation.defaultOptions);
-};
-
-Animation.ANIMATIONS = {
-    FADE_IN: 'fade-in',
-    FADE_OUT: 'fade-out'
-};
-Animation.defaultOptions = {
-    duration: 0.4,
-    delay: 0,
-    units: 's'
-};
-
-Animation.makeAnimation = function (name, options) {
-    var isSupportedAnimation = Object.values(Animation.ANIMATIONS).includes(name);
-    if (!isSupportedAnimation) (0, _consoleUtils.warn)('\'' + name + '\' is a potentially unsupported animation.');
-
-    return new Animation(name, options);
-};
-
-Animation.trigger = function ($element) {
-    $element.removeClass('prepared');
-};
-
-var _initialiseProps = function _initialiseProps() {
-    var _this = this;
-
-    this.prepare = function ($element) {
-        var _options = _this.options,
-            name = _options.name,
-            delay = _options.delay,
-            duration = _options.duration,
-            units = _options.units;
-
-        $element.attr('data-animate', name);
-        $element.css('animation-duration', '' + duration + units);
-        if (delay != 0) $element.css('animation-delay', '' + delay + units);
-        $element.addClass('prepared');
-    };
-};
-
-var Sequence = exports.Sequence = function () {
-    function Sequence(name, animation) {
-        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-        _classCallCheck(this, Sequence);
-
-        _initialiseProps2.call(this);
-
-        this.options = _extends({ name: name, animation: animation }, options);
-    }
-
-    _createClass(Sequence, null, [{
-        key: 'trigger',
-        value: function trigger(name) {
-            var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
-            var $elements = Sequence.registry[name].$elements;
-
-            $elements.each(function (i, element) {
-                var $element = (0, _jquery2.default)(element);
-                setTimeout(function () {
-                    Animation.trigger($element);
-                }, delay * i);
-            });
-        }
-    }]);
-
-    return Sequence;
-}();
-
-Sequence.registry = {};
-
-Sequence._addToRegistry = function ($elements, name, config) {
-    (0, _consoleUtils.print)('adding ' + name + ' elements to registry');
-    (0, _consoleUtils.print)($elements);
-    Sequence.registry[name] = _extends({
-        $elements: $elements, name: name,
-        data: {}
-    }, config);
-};
-
-var _initialiseProps2 = function _initialiseProps2() {
-    var _this2 = this;
-
-    this.prepare = function ($elements) {
-        var _options2 = _this2.options,
-            name = _options2.name,
-            animation = _options2.animation;
-
-        Sequence._addToRegistry($elements, name);
-        $elements.each(function (i, element) {
-            var $element = (0, _jquery2.default)(element);
-            _this2.prepareElement($element, name, animation);
-        });
-    };
-
-    this.prepareElement = function ($element, name, animation) {
-        $element.attr('data-sequence', name);
-        animation.prepare($element);
-    };
-
-    this.trigger = function () {
-        var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 150;
-        var name = _this2.options.name;
-
-        Sequence.trigger(name, delay);
-    };
-};
+Object.defineProperty(exports, 'AnimationFactory', {
+  enumerable: true,
+  get: function get() {
+    return _AnimationFactory.AnimationFactory;
+  }
+});
 
 /***/ }),
 
@@ -14481,17 +14376,78 @@ function removeClasses(el, classNames) {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Animation = undefined;
+
+var _jquery = __webpack_require__(350);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _consoleUtils = __webpack_require__(125);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Animation = exports.Animation = function Animation(name) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, Animation);
+
+    _initialiseProps.call(this);
+
+    options.name = name;
+    this.options = Object.assign({}, Animation.defaultOptions, options);
+};
+
+Animation.defaultOptions = {
+    duration: 0.4,
+    delay: 0,
+    units: 's'
+};
+
+Animation.trigger = function ($element) {
+    $element.removeClass('prepared');
+};
+
+var _initialiseProps = function _initialiseProps() {
+    var _this = this;
+
+    this.prepare = function ($element) {
+        var _options = _this.options,
+            name = _options.name,
+            delay = _options.delay,
+            duration = _options.duration,
+            units = _options.units;
+
+        $element.attr('data-animate', name);
+        $element.css('animation-duration', '' + duration + units);
+        if (delay != 0) $element.css('animation-delay', '' + delay + units);
+        $element.addClass('prepared');
+    };
+};
+
+/***/ }),
+
+/***/ 358:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class, _temp, _initialiseProps;
 
 var _dom = __webpack_require__(356);
 
-var _injectBaseStylesheet = __webpack_require__(358);
+var _injectBaseStylesheet = __webpack_require__(360);
 
 var _injectBaseStylesheet2 = _interopRequireDefault(_injectBaseStylesheet);
 
-var _Lightbox = __webpack_require__(359);
+var _Lightbox = __webpack_require__(361);
 
 var _Lightbox2 = _interopRequireDefault(_Lightbox);
 
@@ -14664,7 +14620,105 @@ module.exports = (_temp = _class = function () {
 
 /***/ }),
 
-/***/ 358:
+/***/ 359:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Sequence = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(350);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _consoleUtils = __webpack_require__(125);
+
+var _Animation = __webpack_require__(357);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Sequence = exports.Sequence = function () {
+    function Sequence(name, animation) {
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+        _classCallCheck(this, Sequence);
+
+        _initialiseProps.call(this);
+
+        this.options = _extends({ name: name, animation: animation }, options);
+    }
+
+    _createClass(Sequence, null, [{
+        key: 'trigger',
+        value: function trigger(name) {
+            var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
+            var $elements = Sequence.registry[name].$elements;
+
+            $elements.each(function (i, element) {
+                var $element = (0, _jquery2.default)(element);
+                setTimeout(function () {
+                    _Animation.Animation.trigger($element);
+                }, delay * i);
+            });
+        }
+    }]);
+
+    return Sequence;
+}();
+
+Sequence.registry = {};
+Sequence.defaultOptions = {
+    delay: 150
+};
+
+Sequence._addToRegistry = function ($elements, name, config) {
+    Sequence.registry[name] = _extends({
+        $elements: $elements, name: name,
+        data: {}
+    }, config);
+};
+
+var _initialiseProps = function _initialiseProps() {
+    var _this = this;
+
+    this.prepare = function ($elements) {
+        var _options = _this.options,
+            name = _options.name,
+            animation = _options.animation;
+
+        Sequence._addToRegistry($elements, name);
+        $elements.each(function (i, element) {
+            var $element = (0, _jquery2.default)(element);
+            _this.prepareElement($element, name, animation);
+        });
+    };
+
+    this.prepareElement = function ($element, name, animation) {
+        $element.attr('data-sequence', name);
+        animation.prepare($element);
+    };
+
+    this.trigger = function () {
+        var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 150;
+        var name = _this.options.name;
+
+        Sequence.trigger(name, delay);
+    };
+};
+
+/***/ }),
+
+/***/ 360:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14693,7 +14747,7 @@ function injectBaseStylesheet() {
 
 /***/ }),
 
-/***/ 359:
+/***/ 361:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14709,7 +14763,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dom = __webpack_require__(356);
 
-var _throwIfMissing = __webpack_require__(360);
+var _throwIfMissing = __webpack_require__(362);
 
 var _throwIfMissing2 = _interopRequireDefault(_throwIfMissing);
 
@@ -14994,7 +15048,7 @@ exports.default = Lightbox;
 
 /***/ }),
 
-/***/ 360:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15010,7 +15064,7 @@ function throwIfMissing() {
 
 /***/ }),
 
-/***/ 361:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15024,7 +15078,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dom = __webpack_require__(356);
 
-var _Luminous = __webpack_require__(357);
+var _Luminous = __webpack_require__(358);
 
 var _Luminous2 = _interopRequireDefault(_Luminous);
 
@@ -15089,6 +15143,116 @@ var LuminousGallery = function () {
 }();
 
 exports.default = LuminousGallery;
+
+/***/ }),
+
+/***/ 364:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.AnimationFactory = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _jquery = __webpack_require__(350);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _consoleUtils = __webpack_require__(125);
+
+var _Animation = __webpack_require__(357);
+
+var _Sequence = __webpack_require__(359);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AnimationFactory = exports.AnimationFactory = function AnimationFactory() {
+	_classCallCheck(this, AnimationFactory);
+};
+
+AnimationFactory.ANIMATIONS = _defineProperty({
+	FADE_IN_FROM_LEFT: 'fade-in-from-left'
+}, 'FADE_IN_FROM_LEFT', 'fade-in-from-bottom');
+AnimationFactory.defaultConfigOptions = {
+	offset: 0,
+	duration: 0.4,
+	delay: 150
+};
+
+AnimationFactory.isSupportedAnimation = function (name, options) {
+	return Object.values(AnimationFactory.ANIMATIONS).includes(name);
+};
+
+AnimationFactory.makeAnimation = function (name, options) {
+	if (!AnimationFactory.isSupportedAnimation) (0, _consoleUtils.warn)('\'' + name + '\' is a potentially unsupported animation.');
+	return new _Animation.Animation(name, options);
+};
+
+AnimationFactory.makeBasicAnimation = function (selector, name) {
+	var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+	var _Object$assign = Object.assign({}, AnimationFactory.defaultConfigOptions, config),
+	    offset = _Object$assign.offset,
+	    duration = _Object$assign.duration;
+
+	var animation = AnimationFactory.makeAnimation(name, { duration: duration });
+	return {
+		selector: selector, offset: offset,
+		onInitElement: function onInitElement($element) {
+			return animation.prepare($element);
+		},
+		onBottomIn: function onBottomIn($element) {
+			return _Animation.Animation.trigger($element);
+		}
+	};
+};
+
+AnimationFactory.makeSequentialAnimation = function (selectors, name, sequenceName) {
+	var config = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+	(0, _consoleUtils.print)(config);
+	(0, _consoleUtils.print)(AnimationFactory.defaultConfigOptions);
+
+	var _Object$assign2 = Object.assign({}, AnimationFactory.defaultConfigOptions, config),
+	    offset = _Object$assign2.offset,
+	    duration = _Object$assign2.duration,
+	    delay = _Object$assign2.delay;
+
+	var selector = void 0,
+	    childSelector = void 0;
+	(0, _consoleUtils.print)(offset);
+	if (Array.isArray(selectors)) {
+		var _selectors = _slicedToArray(selectors, 2);
+
+		selector = _selectors[0];
+		childSelector = _selectors[1];
+	} else {
+		selector = childSelector = selectors;
+	}
+	var animation = AnimationFactory.makeAnimation(name, { duration: duration });
+	return {
+		selector: selector, offset: offset,
+		onInit: function onInit($element) {
+			(0, _consoleUtils.print)('Init \'' + sequenceName + '\' sequence');
+			var $elements = childSelector == selector ? $element : $element.find(childSelector);
+			var sequence = new _Sequence.Sequence(sequenceName, animation);
+			sequence.prepare($elements);
+		},
+		onBottomIn: function onBottomIn($element) {
+			(0, _consoleUtils.print)('Trigger \'' + sequenceName + '\' sequence');
+			_Sequence.Sequence.trigger(sequenceName, delay);
+		}
+	};
+};
 
 /***/ }),
 

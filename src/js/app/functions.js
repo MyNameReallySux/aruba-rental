@@ -84,7 +84,7 @@ export const loadSVGs = ({ $ }) => {
 		$.ajax({
 			url: src,
 			success: function(data){
-				if (data.childNodes.length > 0) { //should be one, _could_ be more
+				if (data.childNodes.length > 0) {
 					$svg.append(data.childNodes[0]);
 				} else {
 					console.log('invalid SVG');
@@ -128,90 +128,12 @@ export const loadImages = ({ $ }) => {
 	})
 }
 
-export const handleScroller = ({ $, Animation, Sequence, Scroller }) => {
-	// let fadeInSequentiallyOnInit = (selector, duration = 'default', delay = 100, initialDelay = 400) => {
-	// 	let animationIndex = 0
-	// 	return {
-	// 		selector,
-	// 		onInitialize: ($element) => {
-	// 			setTimeout(() => {
-	// 				$element.removeClass('prepared')
-	// 			}, animationIndex * delay + initialDelay)
-	// 			animationIndex++
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			$element.removeClass('prepared')
-	// 		}
-	// 	}
-	// }
-
-	// let fadeInFromLeft = (selector, duration = 'default', offset = 0) => {
-	// 	return {
-	// 		selector, offset,
-	// 		onInitialize: ($element) => {
-	// 			$element.attr('data-animate', 'fade-in-right')
-	// 			$element.attr('data-duration', duration)
-	// 			$element.addClass('prepared')
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			$element.removeClass('prepared')
-	// 		}
-	// 	}
-	// }
-
-	// let fadeInSequentiallyFromBottom = (selector, duration = 'default', offset = 0, delay = 100) => {
-	// 	let animationIndex = 0;
-	// 	return {
-	// 		selector, offset,
-	// 		onInitialize: ($element) => {
-	// 			$element.attr('data-animate', 'fade-in-up')
-	// 			$element.attr('data-duration', duration)
-	// 			$element.attr('data-index', animationIndex)
-	// 			$element.addClass('prepared')
-	// 			animationIndex++
-	// 		},
-	// 		onBottomIn: ($element) => {
-	// 			let animationIndex = $element.attr('data-index')
-	// 			setTimeout(() => {
-	// 				$element.removeClass('prepared')
-	// 			}, animationIndex * delay)
-	// 		}
-	// 	}
-	// }
-
-	let fadeInFromLeft = new Animation('fade-in-from-left')
-	let fadeInFromBottom = new Animation('fade-in-from-bottom', { duration: 1 })
-
-	let fadeInSequentiallyFromLeft = new Sequence('parallax-cards', fadeInFromLeft)
-	let fadeInSequentiallyFromBottom = new Sequence('amenities-cards', fadeInFromBottom)
-
-	let scroller = new Scroller([{
-		selector: '.card_horizontal', offset: 0, 
-		onInitElement: ($element) => fadeInFromLeft.prepare($element),
-		onBottomIn: ($element) => Animation.trigger($element)
-	}, {
-		selector: '#Carousel__Amenities', offset: 0,
-		onInit: ($element) => {
-			let $elements = $element.find('.slide .card')
-			fadeInSequentiallyFromBottom.prepare($elements)
-		},
-		onBottomIn: ($element) => Sequence.trigger('amenities-cards', 150),
-	}, {
-		selector: '.parallax-cards', offset: 0,
-		onInit: ($element) => {
-			let $elements = $element.find('.parallax-card')
-			fadeInSequentiallyFromLeft.prepare($elements)
-		},
-		onBottomIn: ($element) => Sequence.trigger('parallax-cards', 150),
-	}])
-
-	// let scroller = new Scroller([
-	// 	fadeInSequentiallyOnInit('.intro-content > *', 'long', 400, 400),
-	// 	fadeInFromLeft('.card_horizontal', 'default', 100),
-	// 	fadeInFromLeft('.parallax-card', 'default,' -100),
-	// 	fadeInSequentiallyFromBottom('.slide .card', 'long', 0, 150),
-	// 	fadeInSequentiallyFromBottom('.slide .feature', 'long', 400, 300)
-	// ])
-
-	// console.log(Scroller.registry)
+export const handleScroller = ({ $, AnimationFactory, Scroller }) => {
+	let { makeBasicAnimation, makeSequentialAnimation } = AnimationFactory
+	let scroller = new Scroller([
+		makeBasicAnimation('.card_horizontal', 'fade-in-from-left', { offset: 0, duration: 0.6 }),
+		makeBasicAnimation('.parallax-card', 'fade-in-from-left', { offset: -100, duration: 0.6 }),
+		makeSequentialAnimation(['#Carousel__Amenities', '.card'], 'fade-in-from-bottom', '@amenities-cards', { duration: 0.6, delay: 200}),
+		makeSequentialAnimation(['#Carousel__Places', '.feature'], 'fade-in-from-bottom', '@feature-cards', { offset: 350, duration: 0.6, delay: 250 }),
+	])
 }
