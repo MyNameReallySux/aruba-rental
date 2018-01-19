@@ -174,6 +174,33 @@ a {
     transition: all 0.4s ease 0s;
 }
 
+.form-field {
+    position: relative;
+}
+
+.form-field input[type='text'],
+    .form-field input[type='email'],
+    .form-field textarea {
+        padding: 8px;
+        border: solid 2px #212114;
+        width: 100%;
+    }
+
+.form-field label {
+        position: absolute;
+        z-index: 5;
+        left: 15px;
+        top: 50%;
+
+        -webkit-transform: translateY(-50%);
+
+                transform: translateY(-50%);
+    }
+
+.form-field + .form-field {
+    margin-top: 8px;
+}
+
 .gradient-white {
     background-image: -webkit-gradient(linear, left top, left bottom, from(hsl(291.4, 36.8%, 96.3%)), color-stop(9.7%, hsla(291.4, 36.8%, 96.3%, .988)), color-stop(18.9%, hsla(291.4, 36.8%, 96.3%, .956)), color-stop(27.4%, hsla(291.4, 36.8%, 96.3%, .909)), color-stop(35.2%, hsla(291.4, 36.8%, 96.3%, .851)), color-stop(42.5%, hsla(291.4, 36.8%, 96.3%, .785)), color-stop(49.3%, hsla(291.4, 36.8%, 96.3%, .715)), color-stop(55.7%, hsla(291.4, 36.8%, 96.3%, .641)), color-stop(61.8%, hsla(291.4, 36.8%, 96.3%, .565)), color-stop(67.7%, hsla(291.4, 36.8%, 96.3%, .486)), color-stop(73.4%, hsla(291.4, 36.8%, 96.3%, .406)), color-stop(78.9%, hsla(291.4, 36.8%, 96.3%, .325)), color-stop(84.3%, hsla(291.4, 36.8%, 96.3%, .244)), color-stop(89.6%, hsla(291.4, 36.8%, 96.3%, .163)), color-stop(94.9%, hsla(291.4, 36.8%, 96.3%, .08)), to(hsla(291.4, 36.8%, 96.3%, 0)));
     background-image: linear-gradient(hsl(291.4, 36.8%, 96.3%) 0%, hsla(291.4, 36.8%, 96.3%, .988) 9.7%, hsla(291.4, 36.8%, 96.3%, .956) 18.9%, hsla(291.4, 36.8%, 96.3%, .909) 27.4%, hsla(291.4, 36.8%, 96.3%, .851) 35.2%, hsla(291.4, 36.8%, 96.3%, .785) 42.5%, hsla(291.4, 36.8%, 96.3%, .715) 49.3%, hsla(291.4, 36.8%, 96.3%, .641) 55.7%, hsla(291.4, 36.8%, 96.3%, .565) 61.8%, hsla(291.4, 36.8%, 96.3%, .486) 67.7%, hsla(291.4, 36.8%, 96.3%, .406) 73.4%, hsla(291.4, 36.8%, 96.3%, .325) 78.9%, hsla(291.4, 36.8%, 96.3%, .244) 84.3%, hsla(291.4, 36.8%, 96.3%, .163) 89.6%, hsla(291.4, 36.8%, 96.3%, .08) 94.9%, hsla(291.4, 36.8%, 96.3%, 0) 100%)
